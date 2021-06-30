@@ -7,7 +7,7 @@ from tkinter import messagebox
 
 doggofiles = Tk()
 doggofiles.title("doggofiles")
-doggofiles.iconbitmap(r"C:\Users\Verkesfl\Documents\Documenten\ICON\winx.ico")
+doggofiles.iconbitmap(r"C:\Users\Verkesfl\Documents\Documenten\ICON\icon.ico")
 doggofiles.configure(bg="#fed2ed")
 doggofiles.geometry("900x550")
 
