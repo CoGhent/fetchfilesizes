@@ -21,7 +21,7 @@ def savefile():
 
 
 def start():
-    column = ["filename", 'path', "filesize"]
+    column = ["filename", 'path', "filesize (MB)"]
     lijst = []
     totalsize = 0
     filetypes = [var1.get(), var2.get(), var3.get(), var4.get(), var5.get(), var6.get(), var7.get()]
