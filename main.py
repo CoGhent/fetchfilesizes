@@ -40,7 +40,7 @@ def start():
                 f = e.split('%£~')
                 lijst.append(f)
     df = pd.DataFrame(lijst, columns=column)
-    df.to_excel(savefile()+"output.xlsx")
+    df.to_excel(savefile()+"\output.xlsx")
     size = Label(doggofiles, text="The total size is: " + str(round(totalsize/1024, 2)) + " GB", bg="#fed2ed")
     size.grid(row=10, column=0, columnspan=4)
 
