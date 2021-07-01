@@ -62,7 +62,6 @@ doggo_pic2.grid(column=0, row=15, columnspan=4)
 info = Label(doggofiles, text="Choose filetypes: ", bg="#fed2ed")
 info.grid(column=0, row=1, columnspan=4)
 
-
 var1 = StringVar()
 var2 = StringVar()
 var3 = StringVar()
@@ -87,10 +86,8 @@ checkmp3.grid(row=5, column=0)
 checkmp4.grid(row=5, column=1)
 checktiff.grid(row=5, column=2)
 
-
 buttonstart = Button(doggofiles, text="Choose a Directory!", padx=50, pady=10, borderwidth=10, bg="#fe37af",
                      command=start)
 buttonstart.grid(row=7, column=0, columnspan=4)
-
 
 doggofiles.mainloop()
