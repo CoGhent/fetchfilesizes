@@ -13,6 +13,13 @@ def openpad():
     return pad
 
 
+def savefile():
+    locatie = filedialog.askdirectory(title="Save File!")
+    toon_locatie = Label(doggofiles, text="Your file can be found here: " + locatie, bg="#fed2ed")
+    toon_locatie.grid(column=0, row=9, columnspan=4)
+    return locatie
+
+
 def start():
     column = ["filename", 'path', "filesize"]
     lijst = []
@@ -33,17 +40,17 @@ def start():
                 f = e.split('%£~')
                 lijst.append(f)
     df = pd.DataFrame(lijst, columns=column)
-    df.to_excel("output.xlsx")
+    df.to_excel(savefile()+"output.xlsx")
     size = Label(doggofiles, text="The total size is: " + str(round(totalsize/1024, 2)) + " GB", bg="#fed2ed")
-    size.grid(row=9, column=0, columnspan=4)
+    size.grid(row=10, column=0, columnspan=4)
 
     if len(lijst) > 0:
         averagesize = totalsize/len(lijst)
         average = Label(doggofiles, text="The average size is: " + str(round(averagesize, 2)) + " MB", bg="#fed2ed")
-        average.grid(row=10, column=0, columnspan=4)
+        average.grid(row=11, column=0, columnspan=4)
     else:
         average = Label(doggofiles, text='The average size is: 0.0 MB', bg="#fed2ed")
-        average.grid(row=10, column=0, columnspan=4)
+        average.grid(row=11, column=0, columnspan=4)
 
 
 doggofiles = Tk()
