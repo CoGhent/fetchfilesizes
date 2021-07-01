@@ -7,7 +7,7 @@ from tkinter import messagebox
 
 doggofiles = Tk()
 doggofiles.title("doggofiles")
-doggofiles.iconbitmap(r"C:\Users\Verkesfl\Documents\Documenten\ICON\winx.ico")
+doggofiles.iconbitmap(r"C:\Users\Verkesfl\Documents\Documenten\ICON\icon.ico")
 doggofiles.configure(bg="#fed2ed")
 doggofiles.geometry("900x550")
 
@@ -30,7 +30,6 @@ path = Button(doggofiles, text="Choose a Directory!", padx=100, pady=10, bg="#fe
 path.grid(column=0, row=1, columnspan=4)
 
 padnaam = openpad()
-print(padnaam)
 
 
 var1 = StringVar()
@@ -78,14 +77,18 @@ def start():
                 e = str(a) + '%£~' + str(b) + '%£~' + str(d)
                 f = e.split('%£~')
                 lijst.append(f)
-    averagesize = totalsize/len(lijst)
     df = pd.DataFrame(lijst, columns=column)
     df.to_excel("output.xlsx")
-    print("The total size is: " + str(round(totalsize / 1024, 2)) + " GB")
     size = Label(doggofiles, text="The total size is: " + str(round(totalsize/1024, 2)) + " GB", bg="#fed2ed")
     size.grid(row=7, column=0, columnspan=4)
-    average = Label(doggofiles, text="The average size is: " + str(round(averagesize, 2)) + " MB", bg="#fed2ed")
-    average.grid(row=8, column=0, columnspan=4)
+
+    if len(lijst) > 0:
+        averagesize = totalsize/len(lijst)
+        average = Label(doggofiles, text="The average size is: " + str(round(averagesize, 2)) + " MB", bg="#fed2ed")
+        average.grid(row=8, column=0, columnspan=4)
+    else:
+        average = Label(doggofiles, text='The average size is: 0.0 MB', bg="#fed2ed")
+        average.grid(row=8, column=0, columnspan=4)
 
 
 buttonstart = Button(doggofiles, text="Start!", padx=50, pady=10, borderwidth=10, bg="#fe37af", command=start)
