@@ -7,7 +7,7 @@ from tkinter import messagebox
 
 
 def openpad():
-    pad = filedialog.askdirectory(title="get dem files doggo!")
+    pad = filedialog.askdirectory(title="Select directory!")
     toon_padnaam = Label(doggofiles, text="You chose this path: " + pad, bg="#fed2ed")
     toon_padnaam.grid(column=0, row=8, columnspan=4)
     return pad
