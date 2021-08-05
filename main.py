@@ -61,16 +61,8 @@ def start():
 
 fetchfilesize = Tk()
 fetchfilesize.title("fetch filesize")
-fetchfilesize.iconbitmap(r"C:\Users\Verkesfl\Documents\Documenten\ICON\icon.ico")
 fetchfilesize.configure(bg="#fed2ed")
 fetchfilesize.geometry("900x550")
-
-doggo = ImageTk.PhotoImage(Image.open(r"C:\Users\Verkesfl\Documents\Documenten\PERSONAL\doggos.jpg"))
-doggo2 = ImageTk.PhotoImage(Image.open(r"C:\Users\Verkesfl\Documents\Documenten\PERSONAL\doggofroggo.jpg"))
-doggo_pic = Label(image=doggo)
-doggo_pic2 = Label(image=doggo2)
-doggo_pic.grid(column=0, row=0, columnspan=4)
-doggo_pic2.grid(column=0, row=15, columnspan=4)
 
 info = Label(fetchfilesize, text="Choose filetypes: ", bg="#fed2ed")
 info.grid(column=0, row=1, columnspan=4)
