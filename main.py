@@ -26,7 +26,7 @@ def save_file():
 
 def choose():
     choice = [variable.get(), variable2.get()]
-    if choice == "directory":
+    if tuple(choice) == ('','directory'):
         def start():
             column = ["filename", 'path', "filesize (MB)"]
             _list = []
