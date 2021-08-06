@@ -28,7 +28,7 @@ def start():
     column = ["filename", 'path', "filesize (MB)"]
     list = []
     totalsize = 0
-    filetypes = [var1.get(), var2.get(), var3.get(), var4.get(), var5.get(), var6.get(), var7.get(), var8.get()]
+    filetypes = [var1.get(), var2.get(), var3.get(), var4.get(), var5.get(), var6.get(), var7.get(), var8.get(), var9.get()]
     while "" in filetypes:
         filetypes.remove("")
     messagebox.showinfo("You chose filetype(s): ", filetypes)
@@ -80,6 +80,7 @@ var5 = StringVar()
 var6 = StringVar()
 var7 = StringVar()
 var8 = StringVar()
+var9 = StringVar()
 
 checktif = Checkbutton(fetchfilesize, text=".tif", bg="#fed2ed", onvalue=".tif", offvalue="", variable=var1)
 checkjpg = Checkbutton(fetchfilesize, text=".jpg", bg="#fed2ed", onvalue=".jpg", offvalue="", variable=var2)
@@ -89,6 +90,7 @@ checkmp3 = Checkbutton(fetchfilesize, text=".mp3", bg="#fed2ed", onvalue=".mp3",
 checkmp4 = Checkbutton(fetchfilesize, text=".mp4", bg="#fed2ed", onvalue=".mp4", offvalue="", variable=var6)
 checktiff = Checkbutton(fetchfilesize, text=".tiff", bg="#fed2ed", onvalue=".tiff", offvalue="", variable=var7)
 checkJPG = Checkbutton(fetchfilesize, text=".JPG", bg="#fed2ed", onvalue=".JPG", offvalue="", variable=var8)
+checkTIF = Checkbutton(fetchfilesize, text=".TIF", bg="#fed2ed", onvalue=".TIF", offvalue="", variable=var9)
 
 checktif.grid(row=4, column=0)
 checkjpg.grid(row=4, column=1)
@@ -98,6 +100,7 @@ checkmp3.grid(row=5, column=0)
 checkmp4.grid(row=5, column=1)
 checktiff.grid(row=5, column=2)
 checkJPG.grid(row=5, column=3)
+checkTIF.grid(row=6, column=0)
 
 buttonstart = Button(fetchfilesize, text="Choose a Directory!", padx=50, pady=10, borderwidth=10, bg="#ffffff",
                      command=start)
