@@ -5,63 +5,129 @@ from tkinter import filedialog
 from tkinter import messagebox
 
 
-def open_directory():
-    file_path = filedialog.askdirectory(title="Select directory!")
-    show_pathname = Label(fetchfilesize, text="You chose this path: " + file_path, bg="#fed2ed")
-    show_pathname.grid(column=0, row=8, columnspan=4)
-    return file_path
+def openpad():
+    pad = filedialog.askdirectory(title="Select directory!")
+    toon_padnaam = Label(fetchfilesize, text="You chose this path: " + pad, bg="#fed2ed")
+    toon_padnaam.grid(column=0, row=8, columnspan=4)
+    return pad
 
 
-def open_file():
+def openfile():
     file = filedialog.askopenfile(title="Select file!")
     return file
 
 
-def save_file():
-    file_location = filedialog.askdirectory(title="Save File!")
-    show_location = Label(fetchfilesize, text="Your file can be found here: " + file_location, bg="#fed2ed")
-    show_location.grid(column=0, row=9, columnspan=4)
-    return file_location
+def savefile():
+    locatie = filedialog.askdirectory(title="Save File!")
+    toon_locatie = Label(fetchfilesize, text="Your file can be found here: " + locatie, bg="#fed2ed")
+    toon_locatie.grid(column=0, row=9, columnspan=4)
+    return locatie
 
+def choose():
+    keuze = [variable.get(), variable2.get()]
+    if keuze == "directory":
+        def start():
+            column = ["filename", 'path', "filesize (MB)"]
+            lijst = []
+            totalsize = 0
+            filetypes = [var1.get(), var2.get(), var3.get(), var4.get(), var5.get(), var6.get(), var7.get(), var8.get(),
+                         var9.get()]
+            while "" in filetypes:
+                filetypes.remove("")
+            messagebox.showinfo("You chose filetype(s): ", filetypes)
 
-def start():
-    column = ["filename", 'path', "filesize (MB)"]
-    list = []
-    totalsize = 0
-    filetypes = [var1.get(), var2.get(), var3.get(), var4.get(), var5.get(), var6.get(), var7.get(), var8.get(), var9.get()]
-    while "" in filetypes:
-        filetypes.remove("")
-    messagebox.showinfo("You chose filetype(s): ", filetypes)
+            for x, y, z in os.walk(openpad()):
+                for a in z:
+                    if a.endswith(tuple(filetypes)):
+                        b = os.path.join(x, a)
+                        c = os.path.getsize(b)
+                        d = round(c / (1024 * 1024), 3)
+                        totalsize += d
+                        e = str(a) + '%£~' + str(b) + '%£~' + str(d)
+                        f = e.split('%£~')
+                        lijst.append(f)
+            df = pd.DataFrame(lijst, columns=column)
+            messagebox.showinfo("Choose location", "Please choose a location to store the result")
+            
+            # Windows OS
+            df.to_excel(str(save_file()) + "\output.xlsx")
 
-    for x, y, z in os.walk(open_directory()):
-        for a in z:
-            if a.endswith(tuple(filetypes)):
-                b = os.path.join(x, a)
-                c = os.path.getsize(b)
-                d = round(c / (1024 * 1024), 3)
-                totalsize += d
-                e = str(a) + '%£~' + str(b) + '%£~' + str(d)
-                f = e.split('%£~')
-                list.append(f)
-    df = pd.DataFrame(list, columns=column)
-    messagebox.showinfo("Choose location", "Please choose a location to store the result")
+            # linux - MAC OS
+            df.to_excel(str(save_file()) + "/output.xlsx")
+            
+            size = Label(fetchfilesize, text="The total size is: " + str(round(totalsize / 1024, 2)) + " GB",
+                         bg="#fed2ed")
+            size.grid(row=10, column=0, columnspan=4)
 
-    # Windows OS
-    df.to_excel(str(save_file()) + "\output.xlsx")
+            if len(lijst) > 0:
+                averagesize = totalsize / len(lijst)
+                average = Label(fetchfilesize, text="The average size is: " + str(round(averagesize, 2)) + " MB",
+                                bg="#fed2ed")
+                average.grid(row=11, column=0, columnspan=4)
+            else:
+                average = Label(fetchfilesize, text='The average size is: 0.0 MB', bg="#fed2ed")
+                average.grid(row=11, column=0, columnspan=4)
 
-    # linux - MAC OS
-    df.to_excel(str(save_file()) + "/output.xlsx")
+        var1 = StringVar()
+        var2 = StringVar()
+        var3 = StringVar()
+        var4 = StringVar()
+        var5 = StringVar()
+        var6 = StringVar()
+        var7 = StringVar()
+        var8 = StringVar()
+        var9 = StringVar()
 
-    size = Label(fetchfilesize, text="The total size is: " + str(round(totalsize / 1024, 2)) + " GB", bg="#fed2ed")
-    size.grid(row=10, column=0, columnspan=4)
+        checktif = Checkbutton(fetchfilesize, text=".tif", bg="#fed2ed", onvalue=".tif", offvalue="", variable=var1)
+        checkjpg = Checkbutton(fetchfilesize, text=".jpg", bg="#fed2ed", onvalue=".jpg", offvalue="", variable=var2)
+        checkwav = Checkbutton(fetchfilesize, text=".wav", bg="#fed2ed", onvalue=".wav", offvalue="", variable=var3)
+        checkmov = Checkbutton(fetchfilesize, text=".mov", bg="#fed2ed", onvalue=".mov", offvalue="", variable=var4)
+        checkmp3 = Checkbutton(fetchfilesize, text=".mp3", bg="#fed2ed", onvalue=".mp3", offvalue="", variable=var5)
+        checkmp4 = Checkbutton(fetchfilesize, text=".mp4", bg="#fed2ed", onvalue=".mp4", offvalue="", variable=var6)
+        checktiff = Checkbutton(fetchfilesize, text=".tiff", bg="#fed2ed", onvalue=".tiff", offvalue="", variable=var7)
+        checkJPG = Checkbutton(fetchfilesize, text=".JPG", bg="#fed2ed", onvalue=".JPG", offvalue="", variable=var8)
+        checkTIF = Checkbutton(fetchfilesize, text=".TIF", bg="#fed2ed", onvalue=".TIF", offvalue="", variable=var8)
 
-    if len(list) > 0:
-        averagesize = totalsize / len(list)
-        average = Label(fetchfilesize, text="The average size is: " + str(round(averagesize, 2)) + " MB", bg="#fed2ed")
-        average.grid(row=11, column=0, columnspan=4)
+        checktif.grid(row=4, column=0)
+        checkjpg.grid(row=4, column=1)
+        checkwav.grid(row=4, column=2)
+        checkmov.grid(row=4, column=3)
+        checkmp3.grid(row=5, column=0)
+        checkmp4.grid(row=5, column=1)
+        checktiff.grid(row=5, column=2)
+        checkJPG.grid(row=5, column=3)
+        checkTIF.grid(row=5, column=4)
+
+        Info = Label(text="This tool ...")
+        Info.grid(row=0, column=0)
+
+        buttonstart = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=10, bg="#fe37af",
+                              command=start)
+        buttonstart.grid(row=7, column=0, columnspan=4)
+
     else:
-        average = Label(fetchfilesize, text='The average size is: 0.0 MB', bg="#fed2ed")
-        average.grid(row=11, column=0, columnspan=4)
+        def start():
+            column = ["filename", 'path', "filesize (MB)"]
+            lijst = []
+
+            for x, y, z in os.walk(openpad()):
+                for a in z:
+                    b = os.path.join(x, a)
+                    c = os.path.getsize(b)
+                    d = round(c / (1024 * 1024), 3)
+                    e = str(a) + '%£~' + str(b) + '%£~' + str(d)
+                    f = e.split('%£~')
+                    lijst.append(f)
+            df = pd.DataFrame(lijst, columns=column)
+            messagebox.showinfo("Choose file", "Please open file with filenames (one column with header 'filename')")
+            filenames = pd.read_csv(openfile())
+            result = pd.merge(filenames, df, left_on='filename', right_on="filename", how='left')
+            messagebox.showinfo("Choose location", "Please choose a location to store the result")
+            result.to_excel(savefile() + r"\result.xlsx")
+
+        buttonstart = Button(fetchfilesize, text="Start!", padx=50, pady=10, borderwidth=10, bg="#fe37af",
+                             command=start)
+        buttonstart.grid(row=7, column=0, columnspan=4)
 
 
 fetchfilesize = Tk()
@@ -69,42 +135,20 @@ fetchfilesize.title("fetch filesize")
 fetchfilesize.configure(bg="#fed2ed")
 fetchfilesize.geometry("900x550")
 
-info = Label(fetchfilesize, text="Choose filetypes: ", bg="#ffffff")
-info.grid(column=0, row=1, columnspan=4)
+Info = Label(text="Please choose filesource and press start")
+Info.grid(row=0, column=0)
 
-var1 = StringVar()
-var2 = StringVar()
-var3 = StringVar()
-var4 = StringVar()
-var5 = StringVar()
-var6 = StringVar()
-var7 = StringVar()
-var8 = StringVar()
-var9 = StringVar()
+variable=StringVar()
+variable2=StringVar()
 
-checktif = Checkbutton(fetchfilesize, text=".tif", bg="#fed2ed", onvalue=".tif", offvalue="", variable=var1)
-checkjpg = Checkbutton(fetchfilesize, text=".jpg", bg="#fed2ed", onvalue=".jpg", offvalue="", variable=var2)
-checkwav = Checkbutton(fetchfilesize, text=".wav", bg="#fed2ed", onvalue=".wav", offvalue="", variable=var3)
-checkmov = Checkbutton(fetchfilesize, text=".mov", bg="#fed2ed", onvalue=".mov", offvalue="", variable=var4)
-checkmp3 = Checkbutton(fetchfilesize, text=".mp3", bg="#fed2ed", onvalue=".mp3", offvalue="", variable=var5)
-checkmp4 = Checkbutton(fetchfilesize, text=".mp4", bg="#fed2ed", onvalue=".mp4", offvalue="", variable=var6)
-checktiff = Checkbutton(fetchfilesize, text=".tiff", bg="#fed2ed", onvalue=".tiff", offvalue="", variable=var7)
-checkJPG = Checkbutton(fetchfilesize, text=".JPG", bg="#fed2ed", onvalue=".JPG", offvalue="", variable=var8)
-checkTIF = Checkbutton(fetchfilesize, text=".TIF", bg="#fed2ed", onvalue=".TIF", offvalue="", variable=var9)
+Filesource1 = Checkbutton(fetchfilesize, text="csv", variable=variable, onvalue = "csv", offvalue = "")
+Filesource2 = Checkbutton(fetchfilesize, text="directory", variable=variable2, onvalue = "directory", offvalue = "")
 
-checktif.grid(row=4, column=0)
-checkjpg.grid(row=4, column=1)
-checkwav.grid(row=4, column=2)
-checkmov.grid(row=4, column=3)
-checkmp3.grid(row=5, column=0)
-checkmp4.grid(row=5, column=1)
-checktiff.grid(row=5, column=2)
-checkJPG.grid(row=5, column=3)
-checkTIF.grid(row=6, column=0)
+Filesource1.grid(row=1, column=0)
+Filesource2.grid(row=1, column=1)
 
-buttonstart = Button(fetchfilesize, text="Choose a Directory!", padx=50, pady=10, borderwidth=10, bg="#ffffff",
-                     command=start)
-buttonstart.grid(row=7, column=0, columnspan=4)
-
+buttonchoose = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=10, bg="#fe37af",
+                     command=choose)
+buttonchoose.grid(row=7, column=0, columnspan=4)
 
 fetchfilesize.mainloop()
