@@ -12,7 +12,7 @@ def open_path():
     return path
 
 
-def open_file():
+def openfile():
     file = filedialog.askopenfile(title="Select file!")
     return file
 
@@ -30,6 +30,7 @@ def choose():
         def start():
             column = ["filename", 'path', "filesize (MB)"]
             _list = []
+
             totalsize = 0
             filetypes = [var1.get(), var2.get(), var3.get(), var4.get(), var5.get(), var6.get(), var7.get(), var8.get(),
                          var9.get()]
@@ -38,6 +39,7 @@ def choose():
             messagebox.showinfo("You chose filetype(s): ", filetypes)
 
             for x, y, z in os.walk(open_path()):
+
                 for a in z:
                     if a.endswith(tuple(filetypes)):
                         b = os.path.join(x, a)
@@ -46,10 +48,12 @@ def choose():
                         totalsize += d
                         e = str(a) + '%£~' + str(b) + '%£~' + str(d)
                         f = e.split('%£~')
+
                         _list.append(f)
             df = pd.DataFrame(_list, columns=column)
             messagebox.showinfo("Choose location", "Please choose a location to store the result")
 
+            
             # Windows OS
             df.to_excel(str(save_file()) + "\output.xlsx")
 
@@ -60,8 +64,10 @@ def choose():
                          bg="#fed2ed")
             size.grid(row=10, column=0, columnspan=4)
 
+
             if len(_list) > 0:
                 averagesize = totalsize / len(_list)
+
                 average = Label(fetchfilesize, text="The average size is: " + str(round(averagesize, 2)) + " MB",
                                 bg="#fed2ed")
                 average.grid(row=11, column=0, columnspan=4)
@@ -102,8 +108,7 @@ def choose():
         Info = Label(text="This tool ...")
         Info.grid(row=0, column=0)
 
-        buttonstart = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=10, bg="#fe37af",
-                             command=start)
+        buttonstart = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=10, bg="#fe37af", command=start)
         buttonstart.grid(row=7, column=0, columnspan=4)
 
     else:
@@ -111,7 +116,9 @@ def choose():
             column = ["filename", 'path', "filesize (MB)"]
             lijst = []
 
+
             for x, y, z in os.walk(open_path()):
+
                 for a in z:
                     b = os.path.join(x, a)
                     c = os.path.getsize(b)
@@ -125,6 +132,7 @@ def choose():
             result = pd.merge(filenames, df, left_on='filename', right_on="filename", how='left')
             messagebox.showinfo("Choose location", "Please choose a location to store the result")
             result.to_excel(save_file() + r"\result.xlsx")
+
 
         buttonstart = Button(fetchfilesize, text="Start!", padx=50, pady=10, borderwidth=10, bg="#fe37af",
                              command=start)
@@ -145,11 +153,11 @@ variable2 = StringVar()
 Filesource1 = Checkbutton(fetchfilesize, text="csv", variable=variable, onvalue="csv", offvalue="")
 Filesource2 = Checkbutton(fetchfilesize, text="directory", variable=variable2, onvalue="directory", offvalue="")
 
+
 Filesource1.grid(row=1, column=0)
 Filesource2.grid(row=1, column=1)
 
-buttonchoose = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=10, bg="#fe37af",
-                      command=choose)
+buttonchoose = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=10, bg="#fe37af", command=choose)
 buttonchoose.grid(row=7, column=0, columnspan=4)
 
 fetchfilesize.mainloop()
