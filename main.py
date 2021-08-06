@@ -134,8 +134,10 @@ Info.grid(row=0, column=0)
 
 variable=StringVar()
 variable2=StringVar()
+
 Filesource1 = Checkbutton(fetchfilesize, text="csv", variable=variable, onvalue = "csv", offvalue = "")
 Filesource2 = Checkbutton(fetchfilesize, text="directory", variable=variable2, onvalue = "directory", offvalue = "")
+
 Filesource1.grid(row=1, column=0)
 Filesource2.grid(row=1, column=1)
 
