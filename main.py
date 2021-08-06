@@ -53,7 +53,6 @@ def choose():
             df = pd.DataFrame(_list, columns=column)
             messagebox.showinfo("Choose location", "Please choose a location to store the result")
 
-            
             # Windows OS
             df.to_excel(str(save_file()) + "\output.xlsx")
 
@@ -64,10 +63,8 @@ def choose():
                          bg="#fed2ed")
             size.grid(row=10, column=0, columnspan=4)
 
-
             if len(_list) > 0:
                 averagesize = totalsize / len(_list)
-
                 average = Label(fetchfilesize, text="The average size is: " + str(round(averagesize, 2)) + " MB",
                                 bg="#fed2ed")
                 average.grid(row=11, column=0, columnspan=4)
@@ -105,8 +102,8 @@ def choose():
         checkJPG.grid(row=5, column=3)
         checkTIF.grid(row=5, column=4)
 
-        Info = Label(text="This tool ...")
-        Info.grid(row=0, column=0)
+        _info = Label(text="This tool ...")
+        _info.grid(row=0, column=0)
 
         buttonstart = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=10, bg="#fe37af", command=start)
         buttonstart.grid(row=7, column=0, columnspan=4)
@@ -115,7 +112,6 @@ def choose():
         def start():
             column = ["filename", 'path', "filesize (MB)"]
             lijst = []
-
 
             for x, y, z in os.walk(open_path()):
 
@@ -133,9 +129,7 @@ def choose():
             messagebox.showinfo("Choose location", "Please choose a location to store the result")
             result.to_excel(save_file() + r"\result.xlsx")
 
-
-        buttonstart = Button(fetchfilesize, text="Start!", padx=50, pady=10, borderwidth=10, bg="#fe37af",
-                             command=start)
+        buttonstart = Button(fetchfilesize, text="Start!", padx=50, pady=10, borderwidth=10, bg="#fe37af", command=start)
         buttonstart.grid(row=7, column=0, columnspan=4)
 
 
