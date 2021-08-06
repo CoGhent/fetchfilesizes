@@ -24,8 +24,8 @@ def savefile():
     return locatie
 
 def choose():
-    keuze = messagebox.askyesno("filesource: csv or directory", "for csv click yes, and no for directory")
-    if keuze == 0:
+    keuze = [variable.get(), variable2.get()]
+    if keuze == "directory":
         def start():
             column = ["filename", 'path', "filesize (MB)"]
             lijst = []
@@ -129,10 +129,17 @@ fetchfilesize.title("fetch filesize")
 fetchfilesize.configure(bg="#fed2ed")
 fetchfilesize.geometry("900x550")
 
-Info = Label(text="This tool ...")
+Info = Label(text="Please choose filesource and press start")
 Info.grid(row=0, column=0)
 
-buttonchoose = Button(fetchfilesize, text="Csv or Directory", padx=50, pady=10, borderwidth=10, bg="#fe37af",
+variable=StringVar()
+variable2=StringVar()
+Filesource1 = Checkbutton(fetchfilesize, text="csv", variable=variable, onvalue = "csv", offvalue = "")
+Filesource2 = Checkbutton(fetchfilesize, text="directory", variable=variable2, onvalue = "directory", offvalue = "")
+Filesource1.grid(row=1, column=0)
+Filesource2.grid(row=1, column=1)
+
+buttonchoose = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=10, bg="#fe37af",
                      command=choose)
 buttonchoose.grid(row=7, column=0, columnspan=4)
 
