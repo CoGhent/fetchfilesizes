@@ -5,6 +5,24 @@ from tkinter import filedialog
 from tkinter import messagebox
 
 
+def info():
+    infowindow = Toplevel()
+    infolabel = Label(infowindow, text="This tool 'walks' through a directory and returns the filename, filepath and filesize for all files inside the directory and its subfolders.")
+    infolabel.grid(row=0, column=0)
+    
+    blank7 = Label(infowindow, text="")
+    blank7.grid(row=1, column=0)
+    
+    infodirectory = Label(infowindow, text="Choose directory if you want to fetch info for all files inside a directory. You can specify certain filetypes.")
+    infodirectory.grid(row=2, column=0)
+    
+    blank8 = Label(infowindow, text="")
+    blank8.grid(row=3, column=0)
+    
+    infocsv = Label(infowindow, text="Choose csv if you have a '.csv' file with the filenames. The tool will only return the filepath and filesize for the filenames provided in the csv.")
+    infocsv.grid(row=4, column=0)
+    
+
 def open_path():
     path = filedialog.askdirectory(title="Select directory!")
     show_path = Label(fetchfilesize, text="You chose this path: " + path, bg="#e4e5e5")
@@ -170,5 +188,8 @@ Filesource2.grid(row=1, column=2)
 
 buttonchoose = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=4, bg="#04a37b", command=choose)
 buttonchoose.grid(row=3, column=1, columnspan=2)
+
+buttoninfo = Button(fetchfilesize, text="Info", borderwidth=4, bg="#b9bcbb", command=info)
+buttoninfo.grid(row=1, column=0)
 
 fetchfilesize.mainloop()
