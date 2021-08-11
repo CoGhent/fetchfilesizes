@@ -30,7 +30,6 @@ def choose():
         def start():
             column = ["filename", 'path', "filesize (MB)"]
             _list = []
-
             totalsize = 0
             filetypes = [var1.get(), var2.get(), var3.get(), var4.get(), var5.get(), var6.get(), var7.get(), var8.get(),
                          var9.get()]
@@ -103,10 +102,10 @@ def choose():
         checkTIF.grid(row=5, column=4)
 
         _info = Label(text="This tool ...")
-        _info.grid(row=0, column=0)
+        _info.grid(row=3, column=1)
 
         buttonstart = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=10, bg="#fe37af", command=start)
-        buttonstart.grid(row=7, column=0, columnspan=4)
+        buttonstart.grid(row=6, column=1, columnspan=2)
 
     else:
         def start():
@@ -139,7 +138,7 @@ fetchfilesize.configure(bg="#fed2ed")
 fetchfilesize.geometry("900x550")
 
 Info = Label(text="Please choose filesource and press start")
-Info.grid(row=0, column=0)
+Info.grid(row=0, column=1)
 
 variable = StringVar()
 variable2 = StringVar()
@@ -148,10 +147,10 @@ Filesource1 = Checkbutton(fetchfilesize, text="csv", variable=variable, onvalue=
 Filesource2 = Checkbutton(fetchfilesize, text="directory", variable=variable2, onvalue="directory", offvalue="")
 
 
-Filesource1.grid(row=1, column=0)
-Filesource2.grid(row=1, column=1)
+Filesource1.grid(row=1, column=1)
+Filesource2.grid(row=1, column=2)
 
 buttonchoose = Button(fetchfilesize, text="Start", padx=50, pady=10, borderwidth=10, bg="#fe37af", command=choose)
-buttonchoose.grid(row=7, column=0, columnspan=4)
+buttonchoose.grid(row=2, column=1, columnspan=2)
 
 fetchfilesize.mainloop()
